@@ -1,0 +1,1 @@
+cmd_/home/david/Downloads/linux-5.12.6/OS-part2/family_task/Module.symvers := sed 's/\.ko$$/\.o/' /home/david/Downloads/linux-5.12.6/OS-part2/family_task/modules.order | scripts/mod/modpost  -a   -o /home/david/Downloads/linux-5.12.6/OS-part2/family_task/Module.symvers -e -i Module.symvers  -N -T -

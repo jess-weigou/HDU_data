@@ -1,0 +1,1 @@
+cmd_/home/david/Downloads/linux-5.12.6/OS-part2/family_task/family_task2.ko := ld -r -m elf_x86_64 --build-id=sha1  -T scripts/module.lds -o /home/david/Downloads/linux-5.12.6/OS-part2/family_task/family_task2.ko /home/david/Downloads/linux-5.12.6/OS-part2/family_task/family_task2.o /home/david/Downloads/linux-5.12.6/OS-part2/family_task/family_task2.mod.o;  true

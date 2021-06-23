@@ -1,0 +1,1 @@
+cmd_/home/david/Downloads/linux-5.12.6/OS-part2/family_task/family_task.mod := { echo  /home/david/Downloads/linux-5.12.6/OS-part2/family_task/family_task.o;  echo; } > /home/david/Downloads/linux-5.12.6/OS-part2/family_task/family_task.mod
