@@ -1,0 +1,187 @@
+module R_I_CPU(
+	clk,rst,clk_m,
+    Inst_code,PC,
+    opcode,rs,rt,rd,shamt,func,imm,offset,
+	ALU_F,ZF,OF,ALU_OP,
+	rd_rt_s,imm_s,rt_imm_s,alu_mem_s,
+	 ALU_B,R_Data_A,W_Addr,W_Data,imm_kz,R_Data_B,M_R_Data,Write_Reg,Mem_Write,Mem_Addr
+    );
+	input clk;//时钟
+    input rst;//清零
+	input clk_m;
+	output reg [31:0]PC;//地址
+    wire [31:0]PC_new;
+    output [31:0]Inst_code;//取出的指令
+    output [5:0]opcode,func;//指令分段
+    output [4:0]rs,rt,rd,shamt;//指令分段
+	output [15:0]imm,offset;//指令分段
+	wire [25:0]address;//指令分段
+    output [31:0] ALU_F;//ALU结果
+	output reg [2:0] ALU_OP;//ALU结果
+	output ZF,OF;
+	output reg Write_Reg;
+	output reg Mem_Write;
+	output [31:0]R_Data_A;
+	output [31:0]R_Data_B;
+	output [31:0]M_R_Data;
+	output [7:0]Mem_Addr;
+	output reg rd_rt_s;
+	output reg imm_s;
+	output reg rt_imm_s;
+	output reg alu_mem_s;
+	
+	output [4:0]W_Addr;
+	output [31:0]ALU_B;
+	output [31:0]W_Data;
+	output reg [31:0]imm_kz;
+	
+	initial PC = 32'h00000000;
+	assign PC_new = PC + 4;
+	 
+
+ROM_B ROM1 (
+  .clka(clk), // input clka
+  .addra(PC[7:2]), // input [5 : 0] addra
+  .douta(Inst_code) // output [31 : 0] douta
+);
+	
+	always @(negedge clk or posedge rst)
+  begin
+	if (rst)
+		PC = 32'h00000000; //PC复位;
+	else
+		PC = PC_new; //PC更新为PC+4;
+end;
+
+	assign opcode =  Inst_code[31:26];
+	assign rs =  Inst_code[25:21];
+	assign rt =  Inst_code[20:16];
+	assign rd=  Inst_code[15:11];
+	assign shamt = Inst_code[10:6];
+	assign func =  Inst_code[5:0];
+	assign imm= Inst_code[15:0];
+	assign offset= Inst_code[15:0];
+	assign address = Inst_code[25:0];
+
+	 always @(*)
+		begin
+		
+		ALU_OP = 3'b100;	//默认做加法
+		rd_rt_s = 1'b0;		//默认写入rd指明的寄存器
+		imm_s = 1'b0;		//默认对立即数/偏移量进行0扩展
+		rt_imm_s = 1'b0;	//默认读出rt寄存器的数据送ALU_B
+		alu_mem_s = 1'b0;	//默认ALU运算结果写入目的寄存器		
+		Write_Reg = 1'b1;	//默认写寄存器      
+     	Mem_Write = 1'b0;	//默认不写存储器	
+		
+    if (opcode==6'b000000)    //R指令
+     begin
+		case (func) 
+		6'b100000:begin ALU_OP=3'b100;end
+		6'b100010:begin ALU_OP=3'b101;end
+		6'b100100:begin ALU_OP=3'b000;end
+		6'b100101:begin ALU_OP=3'b001;end
+		6'b100110:begin ALU_OP=3'b010;end
+		6'b100111:begin ALU_OP=3'b011;end
+		6'b101011:begin ALU_OP=3'b110;end
+		6'b000100:begin ALU_OP=3'b111;end
+		endcase
+    end
+	 else
+		begin
+		case(opcode)
+		6'b001000:begin rd_rt_s=1;imm_s=1;rt_imm_s=1;ALU_OP=100;end  //addi
+		6'b001100:begin rd_rt_s=1;rt_imm_s=1;ALU_OP=000; end  //andi
+		6'b001110:begin rd_rt_s=1;rt_imm_s=1;ALU_OP=010;end  //xori
+		6'b001011:begin rd_rt_s=1;rt_imm_s=1;ALU_OP=110; end  //sltiu
+		6'b100011:begin rd_rt_s=1;imm_s=1;rt_imm_s=1;alu_mem_s=1;ALU_OP=100; end  //lw
+		6'b101011:begin imm_s=1;rt_imm_s=1;ALU_OP=100;Write_Reg=0;Mem_Write=1; end  //sw
+		endcase
+		end
+	end;
+	 
+	always @(*)
+		begin
+		if(imm_s==1'b0)
+			begin
+			imm_kz={{16{1'b0}},imm};
+			end
+		if(imm_s==1'b1)
+			begin
+			case(imm[15])
+			1'b1:imm_kz={{16{1'b1}},imm};
+			1'b0:imm_kz={{16{1'b0}},imm};
+			endcase
+		end
+	end;
+	
+REGS REGS_1(R_Data_A,R_Data_B,W_Data,rs,rt,W_Addr,Write_Reg,rst,~clk);
+	 ALU ALU_1(ALU_OP,R_Data_A,ALU_B,ALU_F,ZF,OF);
+	 	 RAM_B RAM1 (
+  .clka(clk_m), // input clka
+  .wea(Mem_Write), // input [0 : 0] wea
+  .addra(Mem_Addr[7:2]), // input [5 : 0] addra
+  .dina(R_Data_B), // input [31 : 0] dina
+  .douta(M_R_Data) // output [31 : 0] douta
+);
+    assign W_Addr=(rd_rt_s)?rt:rd;
+	 assign ALU_B=(rt_imm_s)?imm_kz:R_Data_B;
+    assign Mem_Addr=ALU_F[7:0];
+    assign W_Data=(alu_mem_s)?M_R_Data:ALU_F;
+endmodule
+
+module REGS(R_Data_A,R_Data_B,W_Data,R_Addr_A,R_Addr_B,W_Addr,Write_Reg,rst,clk);
+	 input clk;//写入时钟信号
+    input rst;//清零信号
+    input Write_Reg;//写控制信号
+    input [4:0]R_Addr_A;//A端口读寄存器地址
+    input [4:0]R_Addr_B;//B端口读寄存器地址
+    input [4:0]W_Addr;//写寄存器地址
+    input [31:0]W_Data;//写入数据
+	 output [31:0]R_Data_A;//A端口读出数据
+    output [31:0]R_Data_B;//B端口读出数据
+	 
+	integer i;
+	reg [31:0] REG_Files[0:31];  
+    initial
+        for(i=0;i<32;i=i+1) REG_Files[i]<=0;
+    always@(posedge clk or posedge rst)
+    begin
+        if(rst)
+                for(i=0;i<32;i=i+1) REG_Files[i]<=0;
+        else
+                if(Write_Reg&&W_Addr!=32'd0) REG_Files[W_Addr]<=W_Data;
+    end
+    assign R_Data_A=REG_Files[R_Addr_A];
+    assign R_Data_B=REG_Files[R_Addr_B];
+
+endmodule
+
+
+module ALU(ALU_OP,A,B,F,ZF,OF);
+	  input  [2:0] ALU_OP;
+	  input  [31:0] A;
+	  input  [31:0] B;
+	  output [31:0] F;
+	  output  ZF;
+	  output  OF;
+	  reg [31:0] F;
+	  reg    C,ZF;
+	  
+	 always@(*)
+	  begin
+		C=0;
+		case(ALU_OP)
+			3'b000:begin F=A&B; end
+			3'b001:begin F=A|B; end
+			3'b010:begin F=A^B; end
+			3'b011:begin F=~(A|B); end 
+			3'b100:begin {C,F}=A+B; end 
+			3'b101:begin {C,F}=A-B; end 
+			3'b110:begin F=A<B; end
+			3'b111:begin F=B<<A; end
+		endcase
+		ZF = F==0;
+		end
+		assign OF = ((ALU_OP==3'b100)||(ALU_OP==3'b101))&&(A[31] ^ B[31] ^ F[31] ^ C); 
+endmodule

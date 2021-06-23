@@ -1,0 +1,13 @@
+	always #13 clk_m=~clk_m;
+	always #47 clk=~clk;
+
+	initial begin
+	
+		clk = 0;
+		rst = 1;
+		clk_m = 0;
+		#3;
+      	rst=0;
+      	
+	end
+endmodule
