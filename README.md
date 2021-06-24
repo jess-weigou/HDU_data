@@ -16,7 +16,13 @@
 
 1、假如打开大学物理链接为https://github.com/jess-weigou/HDU_data/tree/master/大学物理
 
-将tree/master/换成trunk/，
+将tree/master/换成trunk/，输入命令
 
-输入命令 svn checkout    https://github.com/jess-weigou/HDU_data/trunk/大学物理就可以下载了
+```
+ svn checkout    https://github.com/jess-weigou/HDU_data/trunk/大学物理
+```
+
+就可以下载了
+
+
 
