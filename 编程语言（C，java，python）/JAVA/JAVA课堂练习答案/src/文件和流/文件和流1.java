@@ -9,8 +9,8 @@ public class 文件和流1 {
     public static void main(String[] args) throws IOException {
 
 
-        byte b[] = {'H','e','l','l','o','W','o','r','l','d'};
-        byte b1[] = new byte[20];
+        byte[] b = {'H','e','l','l','o','W','o','r','l','d'};
+        byte[] b1 = new byte[20];
         File file = new File("text.txt");
         FileOutputStream fileOutputStream = null;
         FileInputStream fileInputStream = null;

@@ -4,46 +4,32 @@ import java.util.Scanner;
 
 public class fileCopy {
     public static void main(String[] args) {
-        String s[] ;
-        //String s;
+        String s;
         File f = new File("text.txt");
         FileReader fr = null;
         FileWriter fw = null;
-        BufferedWriter bw = null;
-        BufferedReader br  = null;
         Scanner sc = new Scanner(System.in);
         try{
+//            FileInputStream fis = new FileInputStream(f);
+//            FileOutputStream fos = new FileOutputStream("copy.txt");
+            s = sc.nextLine();
+            fr = new FileReader(s);
+            fw = new FileWriter(s+"_copy.txt");
             char []b = new char[(int)f.length()];
-            fr = new FileReader(f);
-            br = new BufferedReader(fr);
-            fw = new FileWriter(f);
-            bw =  new BufferedWriter(fw);
-            int pay = 0,income = 0;
-            while (br.read() != -1){
-                s = br.readLine().split(",");
-                System.out.println(br.readLine());
-                System.out.println(s);
-                if(s[2] == "收入" ){
-                    income += Integer.parseInt(s[4]);
-                }else if(s[2] == "支出"){
-                    pay += Integer.parseInt(s[4]);
-                }
-            }
-            System.out.println(pay);
-            System.out.println(income);
+            System.out.printf("%d%d",1,2);
+            fr.read(b);
+            fw.write(b);
 
-
-        }catch(FileNotFoundException e){
+        } catch(IOException e){
             System.out.println(e.toString());
-        }catch (IOException e){
-            System.out.println(e.toString());
-        }finally {
+        } finally {
+//            fis.close();
+//            fos.close();
             try {
                 if(fr != null){
-
                     fr.close();
                 }
-            }catch (IOException e){
+            }catch (IOException ignored){
 
             }
 
@@ -51,7 +37,7 @@ public class fileCopy {
                 if(fw != null){
                     fw.close();
                 }
-            }catch (IOException e){
+            }catch (IOException ignored){
 
             }
 

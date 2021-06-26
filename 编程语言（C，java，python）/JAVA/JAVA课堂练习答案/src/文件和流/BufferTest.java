@@ -33,11 +33,9 @@ public class BufferTest {
                 bw.write(sentence);
             }
             bw.close();
-        }catch(FileNotFoundException e){
+        } catch(IOException e){
             System.out.println(e.toString());
-        }catch (IOException e){
-            System.out.println(e.toString());
-        }finally {
+        } finally {
             try {
                 if(fr1 != null){
                     fr1.close();
@@ -51,7 +49,7 @@ public class BufferTest {
                 if(bf != null){
                     bf.close();
                 }
-            }catch (IOException e){
+            }catch (IOException ignored){
 
             }
         }
