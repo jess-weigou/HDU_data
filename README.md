@@ -1,5 +1,5 @@
 # README
-# 此号已不用，内容不会更新，已经clone到新号了，大家可以到新号寻找最新的资料(HDU_data)[https://github.com/xiao-jay/HDU_data]
+# 此号已不用，内容不会更新，已经clone到新号了，大家可以到新号寻找最新的资料[HDU_data](https://github.com/xiao-jay/HDU_data)
 > **你好，这是杭州电子科技大学资料库，fork from lyle，在他的基础上加上我大学写的各种报告和作业，也会有收集的期末试卷，因为我是计算机专业所以大部分资料是计算机专业课有关，学弟学妹可以自取，如果这里没找到你想要的，可以看这个网站[助手期末福利](dl.hduhelp.com)**
 
 ## 01
