@@ -19,7 +19,7 @@
 将tree/master/换成trunk/，输入命令
 
 ```
- svn checkout    https://github.com/jess-weigou/HDU_data/trunk/大学物理
+ svn checkout    https://github.com/xiao-jay/HDU_data/trunk/大学物理
 ```
 
 就可以下载了
