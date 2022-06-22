@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/David/Desktop/android/FragementTest/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/Users/David/Desktop/android/FragementTest/app/src/main/res/layout/fragment_left.xml" value="0.1296875" />
+        <entry key="..\:/Users/David/Desktop/android/FragementTest/app/src/main/res/layout/fragment_right.xml" value="0.1" />
+        <entry key="..\:/Users/David/Desktop/android/FragementTest/app/src/main/res/layout/left_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/David/Desktop/android/FragementTest/app/src/main/res/layout/right_fragment.xml" value="0.12335359675785208" />
+        <entry key="..\:/Users/David/Desktop/android/FragementTest/app/src/main/res/layout/right_layout.xml" value="0.12335359675785208" />
+        <entry key="..\:/Users/David/Desktop/android/FragementTest/app/src/main/res/layout/sec_right_fragment.xml" value="0.12335359675785208" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/drawable/tongcheng_all_bg01.xml" value="0.1" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/activity_main.xml" value="0.10625" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/activity_main2.xml" value="0.1911231884057971" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/activity_main3.xml" value="0.14990942028985507" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/button.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/content_main2.xml" value="0.1911231884057971" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/fragment_first.xml" value="0.1911231884057971" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/fragment_left.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/fragment_my.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/fragment_right.xml" value="0.10625" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/fragment_second.xml" value="0.1911231884057971" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/item_custom.xml" value="0.1" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/list_text.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/right_layout.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/David/Desktop/android/Fragement_schedule/app/src/main/res/layout/sec_right_fragment.xml" value="0.12158054711246201" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.16" />
+      </ProjectState>
+    </option>
+  </component>
+</project>
